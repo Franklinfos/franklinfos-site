@@ -1,0 +1,70 @@
+---
+layout: default
+---
+<div class="blog">
+  <h2 id="title">Articles</h2> <!-- Titre par défaut, modifié par JS -->
+  <ul id="post-list">
+    {% for post in site.posts %}
+    <li class="post-list-item" data-tags="{{ post.tags | join: ',' }}" data-author="{{ post.author }}">
+        <img src="{{ post.image | default: '/assets/images/default-image.jpg' | relative_url }}" alt="Image for {{ post.title }}" class="post-list-item-image"/>
+        <div class="post-list-item-content">
+        <a href="{{ post.url | relative_url }}" class="post-list-item-title">{{ post.title }}</a>
+        <small class="post-list-item-small">par <a href="{{ "/blog" | relative_url }}?author={{post.author | slugize}}#title" class="post-list-item-author">{{ post.author }}</a> - publié le {{ post.date | date: "%d/%m/%Y" }}</small>
+        <p class="post-list-item-tags">
+          {% if post.tags %}
+            {% for tag in post.tags %}
+                <a href="{{ "/blog" | relative_url }}?tag={{tag | slugize}}#title" class="post-list-item-tag">
+                    #{{ tag }}
+                </a>
+            {% endfor %}
+          {% endif %}
+        </p>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const author = urlParams.get('author');
+    const tag = urlParams.get('tag');
+    
+    if (author || tag) {
+      document.getElementById("search").classList.add("active");
+      document.getElementById("blog").classList.remove("active");
+
+      document.getElementById('title').textContent = `Résultats de la recherche pour ${tag ? 'le tag "' + tag + '"' : ''} ${author && tag ? 'et ' : ''}${author ? 'l\'auteur ' + author : ''} :`;
+      let no_results = true;
+      const posts = document.querySelectorAll('#post-list li');
+      posts.forEach(post => {
+        let show = false;
+        if (tag && author) {
+          const tags = post.dataset.tags ? post.dataset.tags.split(',') : [];
+          show = tags.includes(tag) && post.dataset.author === author;
+        } else if (tag) {
+          const tags = post.dataset.tags ? post.dataset.tags.split(',') : [];
+          show = tags.includes(tag);
+        } else if (author) {
+          show = post.dataset.author === author;
+        }
+        if (show) {
+          no_results = false;
+        }
+        else {
+          post.style.display = 'none';
+        }
+      });
+      if (no_results) {
+        document.getElementById('post-list').innerHTML = '<liAucun article trouvé.</li>';
+      }
+    }
+
+    if (!author && !tag) {
+      if (document.getElementsByClassName("post-list-item").length === 0) {
+        document.getElementById('post-list').innerHTML = '<li>Aucun article à afficher.</li>';
+      }
+    }
+  });
+</script>
