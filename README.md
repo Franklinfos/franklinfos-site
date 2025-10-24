@@ -1,2 +1,2 @@
 # franklinfos-site
-Sinte Internet de Franklinfos
+Le site Internet de Franklinfos, fait avec Jekyll

@@ -564,6 +564,35 @@ a:hover {
   .dropdown-content {
     max-width: calc(50vw);
   }
+
+  .post .p-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .post .p-image {
+    width: 80%;
+    margin: 0 0 8px 0;
+  }
+  .post .p-date, .p-author {
+    margin: 0;
+  }
+  .post .p-tags {
+    margin-top: 0;
+  }
+
+  .post-list-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 8px 0;
+  }
+  .post-list-item .post-list-item-image {
+    min-width: 60%;
+    max-width: 80%;
+    height: 100px;
+    margin: 12px 0 4px 0;
+  }
 }
 
 @media (max-width: 600px) {
