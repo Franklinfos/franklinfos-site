@@ -3,6 +3,7 @@ layout: post
 title: "Franklinfos arrive..."
 date: 2025-10-24
 author: "La direction de Franklinfos"
+tags: ["à la une"]
 ---
 
 # Chers lecteurs, 
