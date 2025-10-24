@@ -581,6 +581,9 @@ a:hover {
     margin-top: 0;
   }
 
+  #post-list {
+    padding: 0 20px;
+  }
   .post-list-item {
     flex-direction: column;
     align-items: center;
@@ -588,10 +591,11 @@ a:hover {
     padding: 8px 0;
   }
   .post-list-item .post-list-item-image {
-    min-width: 60%;
-    max-width: 80%;
-    height: 100px;
+    width: 65%;
     margin: 12px 0 4px 0;
+  }
+  .post-list-item-tags, .post-list-item-small {
+    margin: 0;
   }
 }
 
